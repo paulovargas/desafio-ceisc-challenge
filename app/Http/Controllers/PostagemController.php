@@ -28,7 +28,7 @@ class PostagemController extends Controller
         $postagem->ativa = $request->input('ativa');
         $postagem->save();
 
-        return redirect(url(''));
+        return redirect(url('/home'));
     }
 
     public function update(Request $request)
