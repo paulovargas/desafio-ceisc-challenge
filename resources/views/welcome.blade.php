@@ -90,7 +90,7 @@
                             </button>
 
                             <div class="card-body">
-                                <b>|| Adicione aqui uma listagem de postagens, com botão de publicar e remover ||</b>
+                                <b>| Adicione aqui uma listagem de postagens, com botão de publicar e remover ||</b>
                             </div>
                         </div>
                     </div>

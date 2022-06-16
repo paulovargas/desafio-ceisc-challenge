@@ -25,4 +25,9 @@ class PostsController extends Controller
     {
         return view('novo');
     }
+    
+    public function editar()
+    {
+        return view('editar');
+    }
 }

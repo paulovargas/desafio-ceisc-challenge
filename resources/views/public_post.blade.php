@@ -5,12 +5,15 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Titulo Postagem</div>
+                @foreach ($postagens as $postagem)
+
+                <div class="card-header">{{$postagem->titulo}}</div>
         
                 <div class="card-body">
                     <img src="..." class="card-img-top" alt="...">
-                    <p class="card-text">Descrição </p>
+                    <p class="card-text">{{$postagem->descricao}} </p>
                 </div>
+                @endforeach
                 
             </div>
         </div>
