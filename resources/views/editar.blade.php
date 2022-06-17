@@ -12,17 +12,17 @@
                     <br>
                     <b>|| Usar AJAX no submit e uma barra de progresso (envio em % ou bytes, qualquer comunicação de andamento) ||</b>
 
-                    <form class="" action="{!! url()->current() !!}" method="post">
-                        {!! csrf_field() !!}
+                    <form class="" action="{{url()->current().'/editar'}}" method="post">
+                        {{ csrf_field() }}
                         <div class="form-group">
                             <label>Título</label>
-                            <input type="text" class="form-control" name="titulo" placeholder=" ">
+                            <input type="text" class="form-control" name="titulo" value="{{$postagem->titulo}}">
                             <br>
                             <label>Descrição</label>
                             <input type="text" class="form-control" name="descricao" placeholder=" ">
                             <br>
                             <label>Imagem</label>
-                            <input type="text" class="form-control" name="imagem" placeholder=" ">
+                            <input type="text" class="form-control" name="imagem" placeholder="">
                             <br>                        
                             <label>Ativa</label>
                             <select name="ativa">

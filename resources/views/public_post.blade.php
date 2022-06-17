@@ -4,18 +4,18 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                @foreach ($postagens as $postagem)
+            @foreach ($postagens as $postagem)
+            @if($postagem->id == $id)
+                <div class="card">
+                    <div class="card-header">{{$postagem->titulo}}</div>            
+                    <div class="card-body">
+                        <img src="..." class="card-img-top" alt="...">
+                        <p class="card-text">{{$postagem->descricao}} </p>
+                    </div>                    
+                </div>            
+            @endif           
+            @endforeach
 
-                <div class="card-header">{{$postagem->titulo}}</div>
-        
-                <div class="card-body">
-                    <img src="..." class="card-img-top" alt="...">
-                    <p class="card-text">{{$postagem->descricao}} </p>
-                </div>
-                @endforeach
-                
-            </div>
         </div>
     </div>
 </div>

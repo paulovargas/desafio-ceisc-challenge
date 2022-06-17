@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Postagem as ModelPostagem;
+
 
 class PublicController extends Controller
 {
@@ -23,11 +25,14 @@ class PublicController extends Controller
      */
     public function index()
     {
-        return view('public');
+        $array['postagens'] = ModelPostagem::get();
+        return view('public', $array);
     }
 
     public function postagem()
     {
-        return view('public_post');
+        return "Essa éa postagem";
+        //$array['postagens'] = ModelPostagem::get();
+        //return view('public', $array);
     }
 }

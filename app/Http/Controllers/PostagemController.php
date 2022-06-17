@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Postagem;
 
+use App\Postagem as ModelPostagem;
+
 class PostagemController extends Controller
 {
     public function index()
@@ -49,5 +51,17 @@ class PostagemController extends Controller
         return redirect(url('/home'));
     }
 
-    
+    public function edit($id)
+    {
+        
+        $id = Postagem::find($id);
+        return redirect(url('/posts/editar'), compact($id));
+    }
+
+    public function postagem($id)
+    {        
+        $postId['id'] = $id;
+        $posts['postagens'] = ModelPostagem::get();
+        return view('public_post', $posts, $postId);
+    }    
 }
