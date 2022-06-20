@@ -13,14 +13,17 @@
                     <b>|| Adicione aqui as postagens ativas ||</b>
                     
                 @foreach ($postagens as $postagem )
+                @if($postagem->ativa == 'S')
                     <div class="card" style="width: 18rem;">
                         <img src="" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{$postagem->titulo}}</h5>
                             <p class="card-text">{{$postagem->descricao}}</p>
-                            <a href="{{url('posts/abrir/'.$postagem->id)}}" class="btn btn-primary">Abrir postagem</a>
+                            <a href="{{ route('abrir_post', ['id'=>$postagem->id])}}" class="btn btn-primary">Abrir postagem</a>
                         </div>
-                    </div>
+                    </div>                
+                @endif
+                    
                 @endforeach
 
                 </div>

@@ -23,9 +23,9 @@
                     </p>
                     <p>Título:  {{$postagem->titulo}}</p>
                     <p>Descrição:  {{$postagem->descricao}}</p>
-                    <a href="{{ URL::to('postagem') }}" class="btn btn-primary">Leia mais</a>
-                    <a href="{{url("posts/edit/$postagem->id")}}" class="btn btn-warning">Editar</a>
-                    <a href="" class="btn btn-success">Publicar</a>
+                    <a href="{{ route('abrir_post', ['id'=>$postagem->id])}}" class="btn btn-primary">Leia mais</a>
+                    <a href="{{ route('editar_post', ['id'=>$postagem->id])}}" class="btn btn-warning">Editar</a>
+                    <a href="{{ route('publicar_post', ['id'=>$postagem->id])}}" class="btn btn-success">Publicar</a>
                     <a href="{{url('posts/deletar/'.$postagem->id)}}" class="btn btn-danger">Remover</a>
                 </div>           
 

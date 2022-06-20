@@ -33,17 +33,7 @@ class PostagemController extends Controller
         return redirect(url('/home'));
     }
 
-    public function update(Request $request)
-    {
-        $postagem = Postagem::find($request->input('id'));
-        $postagem->titulo = $request->input('titulo');
-        $postagem->descricao = $request->input('descricao');
-        $postagem->imagem = $request->input('imagem');
-        $postagem->ativa = $request->input('ativa');
-        $postagem->save();
-
-        return redirect(url('posts'));
-    }
+   
 
     public function destroy($id)
     {
@@ -52,16 +42,31 @@ class PostagemController extends Controller
     }
 
     public function edit($id)
-    {
-        
-        $id = Postagem::find($id);
-        return redirect(url('/posts/editar'), compact($id));
+    {   
+        $postagem = Postagem::findOrFail($id);
+        return view('editar',['postagem' => $postagem]);
+    }
+    public function update(Request $request, $id){
+        $postagem = Postagem::findOrFail($id);
+        $postagem->update([
+            'titulo' =>$request->titulo,
+            'descricao' =>$request->descricao,
+            'imagem' =>$request->imagem,
+            'ativa' =>$request->ativa,
+        ]);
+        return redirect(url('/home'));
+    }
+    public function publicar(Request $request, $id){
+        $postagem = Postagem::findOrFail($id);
+        $postagem->update([
+            'ativa' =>'S',
+        ]);
+        return redirect(url('/home'));
     }
 
-    public function postagem($id)
+    public function abrir($id)
     {        
-        $postId['id'] = $id;
-        $posts['postagens'] = ModelPostagem::get();
-        return view('public_post', $posts, $postId);
+        $postagem = Postagem::findOrFail($id);
+        return view('public_post',['postagem' => $postagem]);
     }    
 }

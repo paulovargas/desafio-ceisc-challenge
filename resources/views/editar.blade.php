@@ -12,23 +12,28 @@
                     <br>
                     <b>|| Usar AJAX no submit e uma barra de progresso (envio em % ou bytes, qualquer comunicação de andamento) ||</b>
 
-                    <form class="" action="{{url()->current().'/editar'}}" method="post">
+                    <form class="" action="{{ route('atualizar_post', ['id' => $postagem->id]) }}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label>Título</label>
                             <input type="text" class="form-control" name="titulo" value="{{$postagem->titulo}}">
                             <br>
                             <label>Descrição</label>
-                            <input type="text" class="form-control" name="descricao" placeholder=" ">
+                            <input type="text" class="form-control" name="descricao" value="{{$postagem->descricao}}">
                             <br>
                             <label>Imagem</label>
-                            <input type="text" class="form-control" name="imagem" placeholder="">
+                            <input type="text" class="form-control" name="imagem" value ="{{$postagem->imagem}}">
                             <br>                        
                             <label>Ativa</label>
-                            <select name="ativa">
+                            <select name="ativa" >
+                            @if($postagem->ativa == 'S'){
                                 <option value="S" selected>Sim</option>
-                                <option value="N">Não</option>
-                              </select>
+                            }
+                            @else<option value="N" selected>Não</option>
+                            @endif
+                            <option value="S" >Sim</option>
+                            <option value="N" >Não</option>
+                            </select>
                         </div>
                         <button type="submit">Salvar</button>
 

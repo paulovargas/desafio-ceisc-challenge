@@ -14,7 +14,10 @@ Route::get('/posts/deletar/{id}', 'PostagemController@destroy');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/postagem', 'PublicController@postagem');
-Route::get('/posts/abrir/{id}', 'PostagemController@postagem');
-
 Route::get('/', 'PublicController@index');
+
+
+Route::get('/posts/edit/{id}', 'PostagemController@edit')->name('editar_post');
+Route::post('/posts/edit/{id}', 'PostagemController@update')->name('atualizar_post');
+Route::post('/posts/publicar/{id}', 'PostagemController@publicar')->name('publicar_post');
+Route::get('/posts/abrir/{id}', 'PostagemController@abrir')->name('abrir_post');
