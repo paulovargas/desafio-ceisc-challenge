@@ -31,7 +31,6 @@ class PostagemFactory extends Factory
     return [
         'titulo' => $title,
         'descricao' => Str::slug($title),
-        'imagem' => str_replace('public','',$thumb),
         'ativa' => 'S',
         'remember_token' => Str::random(10),
     ];

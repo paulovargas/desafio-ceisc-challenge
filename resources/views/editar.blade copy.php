@@ -1,3 +1,11 @@
+$id = json_decode($request->input('id'));
+        $form = new Postagem;
+        $form->titulo = json_decode($request->input('titulo'));
+        $form->descricao = json_decode($request->input('descricao'));
+        $form->imagem = json_decode($request->input('imagem'));
+        $form->ativa = json_decode($request->input('ativa'));    
+
+
 <script>
                         $(function(){
                             $('form[name="formPost"]').submit(function(event){

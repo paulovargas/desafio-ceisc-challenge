@@ -6,37 +6,93 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Nova postagem</div>
+                <div id="upload">
 
                 <div class="card-body">
-                    <b>|| Adicione aqui o cadastro da postagem, campos na base de dados, tabela POSTAGEM ||</b>
                     <b>|| Adicione aqui o cadastro da postagem, campos na base de dados, tabela POSTAGEM ||</b>
                     <br>
                     <b>|| Usar AJAX no submit e uma barra de progresso (envio em % ou bytes, qualquer comunicação de andamento) ||</b>
 
-                    <form class="" action="{{url()->current()}}" method="post">
-                        {{csrf_field()}}
+                    <form name="formPost" class="formPost" name="formPost">
                         <div class="form-group">
+                            <input type="hidden" class="form-control" id="id" name="id">
+
                             <label>Título</label>
-                            <input type="text" class="form-control" name="titulo">
+                            <input type="text" class="form-control" id="titulo" name="titulo">
                             <br>
                             <label>Descrição</label>
-                            <input type="text" class="form-control" name="descricao">
+                            <input type="text" class="form-control" id="descricao" name="descricao">
                             <br>
-                            <label>Imagem</label>
-                            <input type="text" class="form-control" name="imagem">
-                            <br>                        
+                            <br />
+                            <progress value="0" max="100" class="form-control"></progress>
+                            <span>Carregamento : </span><span id="porcentagem">0%</span>
+                            <br />
+                           
+                            <br>
+                                                 
                             <label>Ativa</label>
-                            <select name="ativa">
-                                <option value="S">Sim</option>
+                            <select id="postativa" name="postativa" >
                                 <option value="N" selected>Não</option>
-                              </select>
+                                <option value="S" >Sim</option>
+                            </select>
                         </div>
-                        <button type="submit">Publicar</button>
-
+                        <button type="submit">Salvar</button>                      
+                        </div>
                     </form>
+                    
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+                    <script>
+                        $(function(){
+                            
+
+                            $('form[name="formPost"]').submit(function(event){
+                                event.preventDefault();
+
+                                var divReturn;
+                                
+                                var pct = 0;
+                                
+                                $.ajax({ 
+
+                                    url: '{{route('novo')}}',
+                                    method: 'POST',
+                                    data:
+                                    {
+                                        id: $('#id').val(),
+                                        titulo: $('#titulo').val(),
+                                        descricao: $('#descricao').val(),
+                                        postativa: $('#postativa').val(),
+                                    },
+                                    headers: 
+                                    {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                                    },
+                                    contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+                                    dataType: 'json',
+                                    uploadProgress: function( event, percentComplete) {
+                                    $('progress').attr('value', percentComplete);
+                                    $('#porcentagem').html( percentComplete + '%');
+                                    },
+                                    success: function(response){                                       
+                                        if(response.success === true){
+                                            $('progress').attr('value','100');
+                                            $('#porcentagem').html('100%');
+                                            alert( response.message );
+
+                                        }else{
+                                            alert('Erro :' + response.message );
+                                        }                                        
+                                    } 
+                                }) })                           
+                        })
+
+                    </script>
+                </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection

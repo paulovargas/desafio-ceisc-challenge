@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
          DB::table('postagem')->insert([
             'titulo' => 'Primeiro Teste',
             'descricao' => 'Esta é a postagem de teste',
-            'imagem' => '',
             'ativa' => 'S',
             ]);
          }

@@ -23,15 +23,24 @@ class PostagemController extends Controller
 
     public function store(Request $request)
     {
+        //$postagem = new Postagem;
+        //$postagem->titulo = $request->input('titulo');
+        //$postagem->descricao = $request->input('descricao');
+        //$postagem->ativa = $request->input('ativa');
+        //$postagem->save();
+
+        return redirect(url('/home'));
+    }/*
+    public function store(Request $request)
+    {
         $postagem = new Postagem;
         $postagem->titulo = $request->input('titulo');
         $postagem->descricao = $request->input('descricao');
-        $postagem->imagem = $request->input('imagem');
         $postagem->ativa = $request->input('ativa');
         $postagem->save();
 
         return redirect(url('/home'));
-    }
+    }*/
 
    
 
@@ -46,43 +55,41 @@ class PostagemController extends Controller
         $postagem = Postagem::findOrFail($id);
         return view('editar',['postagem' => $postagem]);
     }
-    public function upload(Request $request)
-    {
-
-        
-        var_dump($titulo = $request->input('titulo'));
-        var_dump($descricao = $request->input('descricao'));
-        exit;
-        //dd($request);
-        //echo json_decode($_SERVER['RESQUEST_METHOD']); 
-
-        /*
-        if ($request -> ajax()) { 
-            $jsonString = $request -> ajax(); 
-        }
-        $data = json_decode($jsonString); 
-        */
-        //dd($request -> ajax());
-        //exit; 
-        $postagem['success'] = true;
-        $postagem['message'] =  'Ok';
-        echo json_encode($postagem);
-        dd($request);         
-         
+  
+    public function novo(Request $request)
+    {      
+        $post = new Postagem;
+        $post->titulo = (string)$request->input('titulo');
+        $post->descricao = (string)$request->input('descricao');
+        $post->ativa = (string)$request->input('postativa');
+        $post->save();
+        $response['success'] = true;
+        $response['message'] =  'Dados salvos com sucesso!';
+        echo json_encode($response);
+       
     }
-    public function update(){
-
-        //$postagem = Postagem::findOrFail($id);
-        //$postagem->update([
-        //    'titulo' =>$request->titulo,
-        //    'descricao' =>$request->descricao,
-        //    'imagem' =>$request->imagem,
-        //    'ativa' =>$request->ativa,
-        //]);
-        //return redirect(url('/home'));
-        $postagem['success'] = true;
-        echo json_encode($postagem);
-        //return 'Deu certo : ' + $postagem;
+    public function update(Request $request)
+    {
+        $id = (string)json_decode($request->input('id'));
+        $titulo = (string)$request->input('titulo');
+        $descricao = (string)$request->input('descricao');
+        $postativa = (string)$request->input('postativa');
+        $post = new Postagem;
+        $post->titulo = $titulo;
+        $post->descricao = $descricao;
+        $post->postativa = $postativa;
+        $post = (object)$post;       
+        $postagem = Postagem::findOrFail($id);
+        $postagem->update([
+            'titulo' => $post->titulo,
+            'descricao' => $post->descricao,
+            'ativa' => $post->postativa,
+        ]);      
+       
+        $response['success'] = true;
+        $response['message'] =  'Dados salvos com sucesso!';
+        echo json_encode($response);
+       
     }
     public function publicar($id){
         $postagem = Postagem::findOrFail($id);

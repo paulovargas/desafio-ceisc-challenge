@@ -15,28 +15,23 @@
 
                     <form name="formPost" class="formPost" name="formPost">
                         <div class="form-group">
-                            <input type="hidden" class="form-control" name="id" value="{{$postagem->id}}">
+                            <input type="hidden" class="form-control" id="id" name="id" value="{{$postagem->id}}">
 
                             <label>Título</label>
                             <input type="text" class="form-control" id="titulo" name="titulo" value="{{$postagem->titulo}}">
                             <br>
-                            <div id="alertaTeste" name="alertaTeste" class="alert alert-danger d-none messageBox" role="alert"></div>
-                            <br>
                             <label>Descrição</label>
                             <input type="text" class="form-control" id="descricao" name="descricao" value="{{$postagem->descricao}}">
                             <br>
-                            <div id="return"></div>                            
-                            <label>Imagem</label>
-                            <input type="file" class="form-control" id="imagem" name="imagem" >
-                            
                             <br />
-                            <progress value="0" max="100" class="form-control"></progress><span class="justify-content-center" id="porcentagem">Carregamento : 0%</span>
+                            <progress value="0" max="100" class="form-control"></progress>
+                            <span>Carregamento : </span><span id="porcentagem">0%</span>
                             <br />
                            
                             <br>
                                                  
                             <label>Ativa</label>
-                            <select name="ativa" >
+                            <select id="postativa" name="postativa" >
                             @if($postagem->ativa == 'S'){
                                 <option value="S" selected>Sim</option>
                                 <option value="N" >Não</option>
@@ -57,35 +52,29 @@
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
                     <script>
                         $(function(){
+                            
+
                             $('form[name="formPost"]').submit(function(event){
                                 event.preventDefault();
+
+                                var divReturn;
+                                
+                                
+
+
                                 
                                 var pct = 0;
-
-                                //data = new XMLHttpRequest();
-
-                                /*var formData = JSON.stringify({
-                                    titulo: $('#titulo').val(),
-                                    descricao: $('#descricao').val(),
-                                    imagem: $('#imagem').val(),
-                                    ativa: $('#ativa').val(),
-                                    });//new FormData();*/
-
-                                //formData = $(this).serialize(),
-
-                                //console.log('Evento :' formData);
-
-                    
+                                
                                 $.ajax({ 
 
-                                    url: '{{route('upload')}}',
+                                    url: '{{route('editar')}}',
                                     method: 'POST',
                                     data:
                                     {
+                                        id: $('#id').val(),
                                         titulo: $('#titulo').val(),
                                         descricao: $('#descricao').val(),
-                                        imagem: $('#imagem').val(),
-                                        ativa: $('#ativa').val(),
+                                        postativa: $('#postativa').val(),
                                     },
                                     headers: 
                                     {
@@ -93,24 +82,23 @@
                                     },
                                     contentType: "application/x-www-form-urlencoded;charset=UTF-8",
                                     dataType: 'json',
-                                    uploadProgress: function(event, position, total, pct) {
-                                    $('progress').attr('value',pct);
-                                    $('#porcentagem').html(pct);
-                                },
-                                    
-                                success: function(response){
-                                        $('progress').attr('value','100');
-                                        $('#porcentagem').html(pct +'%');
-                                        console.log('formData :', formData) 
+                                    uploadProgress: function( event, percentComplete) {
+                                    $('progress').attr('value', percentComplete);
+                                    $('#porcentagem').html( percentComplete + '%');
+                                    },
+                                    success: function(response){                                       
                                         if(response.success === true){
-                                        console.log('Retorno:',response.message);
-                                            alert('Retorno:', response.message);
+                                            $('progress').attr('value','100');
+                                            $('#porcentagem').html('100%');
+                                            alert( response.message );
+
                                         }else{
                                             alert('Erro :' + response.message );
                                         }                                        
                                     } 
                                 }) })                           
                         })
+
                     </script>
                 </div>
                 </div>

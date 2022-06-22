@@ -17,7 +17,6 @@ class CreatePostagemTable extends Migration
             $table->bigIncrements('id');
             $table->string('titulo', 120)->nullable();
             $table->longText('descricao');
-            $table->string('imagem', 120);
             $table->enum('ativa', ['S', 'N'])->default('N')->comment = "Se a postagem deve aparecer na home | S = Sim | N = Nao";
             $table->timestamps();
             $table->softDeletes();
