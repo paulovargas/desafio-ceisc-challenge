@@ -18,6 +18,11 @@ Route::get('/', 'PublicController@index');
 
 
 Route::get('/posts/edit/{id}', 'PostagemController@edit')->name('editar_post');
-Route::post('/posts/edit/{id}', 'PostagemController@update')->name('atualizar_post');
+Route::post('/posts/edit', 'PostagemController@update')->name('atualizar_post');
+Route::get('/posts/edit', 'PostagemController@update')->name('atualizar_post');
+Route::get('/posts/edit', 'PostagemController@upload')->name('upload');
+Route::post('/posts/edit', 'PostagemController@upload')->name('upload');
+Route::get('/posts/edit', 'PostagemController@upload')->name('upload');
+Route::get('/posts/publicar/{id}', 'PostagemController@publicar')->name('publicar_post');
 Route::post('/posts/publicar/{id}', 'PostagemController@publicar')->name('publicar_post');
 Route::get('/posts/abrir/{id}', 'PostagemController@abrir')->name('abrir_post');

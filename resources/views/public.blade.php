@@ -21,9 +21,8 @@
                             <p class="card-text">{{$postagem->descricao}}</p>
                             <a href="{{ route('abrir_post', ['id'=>$postagem->id])}}" class="btn btn-primary">Abrir postagem</a>
                         </div>
-                    </div>                
-                @endif
-                    
+                    </div>                          
+                @endif                    
                 @endforeach
 
                 </div>

@@ -46,22 +46,50 @@ class PostagemController extends Controller
         $postagem = Postagem::findOrFail($id);
         return view('editar',['postagem' => $postagem]);
     }
-    public function update(Request $request, $id){
-        $postagem = Postagem::findOrFail($id);
-        $postagem->update([
-            'titulo' =>$request->titulo,
-            'descricao' =>$request->descricao,
-            'imagem' =>$request->imagem,
-            'ativa' =>$request->ativa,
-        ]);
-        return redirect(url('/home'));
+    public function upload(Request $request)
+    {
+
+        
+        var_dump($titulo = $request->input('titulo'));
+        var_dump($descricao = $request->input('descricao'));
+        exit;
+        //dd($request);
+        //echo json_decode($_SERVER['RESQUEST_METHOD']); 
+
+        /*
+        if ($request -> ajax()) { 
+            $jsonString = $request -> ajax(); 
+        }
+        $data = json_decode($jsonString); 
+        */
+        //dd($request -> ajax());
+        //exit; 
+        $postagem['success'] = true;
+        $postagem['message'] =  'Ok';
+        echo json_encode($postagem);
+        dd($request);         
+         
     }
-    public function publicar(Request $request, $id){
+    public function update(){
+
+        //$postagem = Postagem::findOrFail($id);
+        //$postagem->update([
+        //    'titulo' =>$request->titulo,
+        //    'descricao' =>$request->descricao,
+        //    'imagem' =>$request->imagem,
+        //    'ativa' =>$request->ativa,
+        //]);
+        //return redirect(url('/home'));
+        $postagem['success'] = true;
+        echo json_encode($postagem);
+        //return 'Deu certo : ' + $postagem;
+    }
+    public function publicar($id){
         $postagem = Postagem::findOrFail($id);
         $postagem->update([
             'ativa' =>'S',
         ]);
-        return redirect(url('/home'));
+        return redirect(url('/'));
     }
 
     public function abrir($id)

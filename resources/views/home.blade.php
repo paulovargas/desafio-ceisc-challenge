@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <b>|| Adicione aqui uma listagem de postagens, com botão de publicar e remover ||</b>
                 </div>
-                @foreach ($postagens as $postagem )
+                @forelse ($postagens as $postagem )
 
                 <div class="card-body">
                     <h5 class="card-title"></h5>
@@ -27,9 +27,9 @@
                     <a href="{{ route('editar_post', ['id'=>$postagem->id])}}" class="btn btn-warning">Editar</a>
                     <a href="{{ route('publicar_post', ['id'=>$postagem->id])}}" class="btn btn-success">Publicar</a>
                     <a href="{{url('posts/deletar/'.$postagem->id)}}" class="btn btn-danger">Remover</a>
-                </div>           
-
-                @endforeach
+                </div>
+                @empty <h2>Nenhum post encontrado</h2>                    
+                @endforelse
 
             </div>
         </div>
