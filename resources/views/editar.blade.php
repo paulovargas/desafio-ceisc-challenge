@@ -51,20 +51,25 @@
                     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
                     <script>
+                        
                         $(function(){
-                            
+
+                            var barra = false
 
                             $('form[name="formPost"]').submit(function(event){
                                 event.preventDefault();
 
-                                var divReturn;
-                                
+                                console.log('barra ',barra)
+
+                                if(barra){
+                                    
+                                    alert("Dados dabarr com sucesso !")
+                                    window.location.replace('{{route('home')}}')
                                 
 
+                                }
 
-                                
-                                var pct = 0;
-                                
+                                                               
                                 $.ajax({ 
 
                                     url: '{{route('editar')}}',
@@ -82,23 +87,31 @@
                                     },
                                     contentType: "application/x-www-form-urlencoded;charset=UTF-8",
                                     dataType: 'json',
-                                    uploadProgress: function( event, percentComplete) {
-                                    $('progress').attr('value', percentComplete);
-                                    $('#porcentagem').html( percentComplete + '%');
+                                   
+                                    uploadProgress: function( event, percentComplete, barra) {
+                                        $('progress').attr('value', percentComplete);
+                                        $('#porcentagem').html( percentComplete + '%');
+
                                     },
                                     success: function(response){                                       
                                         if(response.success === true){
                                             $('progress').attr('value','100');
-                                            $('#porcentagem').html('100%');
-                                            alert( response.message );
-
+                                            $('#porcentagem').html('100%');                                            
                                         }else{
                                             alert('Erro :' + response.message );
                                         }                                        
                                     } 
-                                }) })                           
-                        })
-
+                                
+                                },
+                                $(function(event){
+                                    alert("Dados salvos com sucesso !");
+                                    window.location.replace('{{route('home')}}');
+                                })
+                            )
+                        }
+                    )
+                }
+            )          
                     </script>
                 </div>
                 </div>

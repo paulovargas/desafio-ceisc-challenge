@@ -78,14 +78,21 @@
                                         if(response.success === true){
                                             $('progress').attr('value','100');
                                             $('#porcentagem').html('100%');
-                                            alert( response.message );
 
                                         }else{
                                             alert('Erro :' + response.message );
                                         }                                        
-                                    } 
-                                }) })                           
-                        })
+                                    }
+                                },
+                                $(function(event){
+                                    alert("Dados salvos com sucesso !");
+                                    window.location.replace('{{route('home')}}');
+                                })
+                            )
+                        }
+                    )
+                }
+            )
 
                     </script>
                 </div>

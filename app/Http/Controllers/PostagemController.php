@@ -23,27 +23,9 @@ class PostagemController extends Controller
 
     public function store(Request $request)
     {
-        //$postagem = new Postagem;
-        //$postagem->titulo = $request->input('titulo');
-        //$postagem->descricao = $request->input('descricao');
-        //$postagem->ativa = $request->input('ativa');
-        //$postagem->save();
-
         return redirect(url('/home'));
-    }/*
-    public function store(Request $request)
-    {
-        $postagem = new Postagem;
-        $postagem->titulo = $request->input('titulo');
-        $postagem->descricao = $request->input('descricao');
-        $postagem->ativa = $request->input('ativa');
-        $postagem->save();
-
-        return redirect(url('/home'));
-    }*/
-
-   
-
+    }
+    
     public function destroy($id)
     {
         Postagem::find($id)->delete();

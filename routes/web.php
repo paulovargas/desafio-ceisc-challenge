@@ -21,10 +21,6 @@ Route::get('/', 'PublicController@index');
 
 Route::get('/posts/edit/{id}', 'PostagemController@edit')->name('editar_post');
 
-//Route::get('/posts/novo', 'PostagemController@novo')->name('novo');
-
-//Route::post('/posts/novo', 'PostagemController@novo')->name('novo');
-
 Route::get('/posts/edit', 'PostagemController@update')->name('editar');
 
 Route::post('/posts/edit', 'PostagemController@update')->name('editar');
